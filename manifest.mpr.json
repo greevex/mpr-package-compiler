@@ -1,0 +1,16 @@
+{
+    "name" : "pharc",
+    "description" : "Phar compiler.",
+    "package" : {
+        "path" : "/",
+        "init" : "pharc.php",
+        "version" : "1.0"
+    },
+    "meta" : {
+        "type" : "application",
+        "tags" : "phar,compiler"
+    },
+    "depends" : [
+
+    ]
+}
