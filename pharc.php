@@ -25,15 +25,18 @@ class helper
     /**
      * Build mpr package (.phar) by package manifest array
      *
-     * @param array $package Package manifest array
+     * @param      $lib_path
+     * @param      $phar_file
+     * @param bool $pharHeader
+     *
      * @return bool Result
      */
     public function createMprPackage($lib_path, $phar_file, $pharHeader = false)
     {
         try {
             $manifest = $this->loadManifest($lib_path);
-            if(!$this->validateManifest($manifest)) {
-                throw new \Exception("Could not load manifest!");
+            if(!$manifest) {
+                throw new \Exception("Could not load or validate manifest!");
             }
             if(file_exists($phar_file)) {
                 $this->writeLn("[ERROR] Package already exists!");
@@ -119,6 +122,7 @@ class helper
             return false;
         }
         if($needBeArray && !is_array($package[$param])) {
+            $this->writeLn("`{$param}` parameter is not array");
             return false;
         }
         return true;
@@ -135,4 +139,4 @@ $lib_path = trim($GLOBALS['argv'][1]);
 $pharfile = trim($GLOBALS['argv'][2]);
 
 $helper = new helper();
-$helper->createMprPackage($lib_path, $pharfile);
+$helper->createMprPackage(realpath($lib_path), realpath($pharfile));
