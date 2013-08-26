@@ -139,4 +139,4 @@ $lib_path = trim($GLOBALS['argv'][1]);
 $pharfile = trim($GLOBALS['argv'][2]);
 
 $helper = new helper();
-$helper->createMprPackage(realpath($lib_path), realpath($pharfile));
+$helper->createMprPackage(realpath($lib_path), realpath(dirname($pharfile)) . '/' . basename($pharfile));
